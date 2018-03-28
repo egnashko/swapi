@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input, select, button, input[type=button], input[type=submit], textarea {
+    outline: none;
+}
+
+a, a:hover, a:visited, a:active {
+    text-decoration: none;
+}
+
+button, a, input[type=button], input[type=submit] {
+    cursor: pointer;
+}
+
+button {
+    &:visited, &:active, &:focus {
+        outline: none;
+    }
+}
+
+li {
+    list-style: none;
+}
+
+label {
+    cursor: pointer;
+}
+
+input:focus, select:focus {
+    outline:none;
+}
