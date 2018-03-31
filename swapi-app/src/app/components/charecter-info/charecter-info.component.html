@@ -1,3 +1,10 @@
-<p>
-  charecter-info works!
-</p>
+<ul class="list-group"><span>Character info</span>
+  <li class="list-group-item">{{charecter.name || 'Name not available'}}</li>
+  <li class="list-group-item">{{charecter.species || 'Species not available'}}</li>
+  <li class="list-group-item">
+    Movies: <i *ngIf="!charecter.movies">No muvies present</i><q *ngFor="let film of charecter.movies">{{film}}, </q>
+  </li>
+  <li class="list-group-item">
+    Spaceships: <i *ngIf="!charecter.spaceships">No spaceships available</i><q *ngFor="let spaceship of charecter.spaceships">{{spaceship}}, </q>
+  </li>
+</ul>

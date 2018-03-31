@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
@@ -12,10 +13,13 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { HttpService } from '../app/services/http.service';
 import { ApiService } from '../app/services/api.service';
 
+import { StoreModule } from '@ngrx/store';
+import { CharecterListReducer } from './reducers/charecters-list.reducer';
+
 const routes: Routes = [
   { path: '', redirectTo: '/charecters-list', pathMatch: 'full' },
   { path: 'charecters-list', component: CharectersListComponent },
-  { path: 'information:id', component: CharecterInfoComponent },
+  { path: 'information/:id', component: CharecterInfoComponent },
   { path: '**', component: PageNotFoundComponent }
 ]
 
@@ -30,7 +34,10 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes),
+    StoreModule.forRoot({charList: CharecterListReducer})
   ],
   providers: [
     HttpService,
