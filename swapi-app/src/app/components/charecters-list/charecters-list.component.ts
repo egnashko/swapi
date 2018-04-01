@@ -24,7 +24,6 @@ interface AppState {
 export class CharectersListComponent implements OnInit {
   public charactersList: characterModel[] = [];
   private url: string = environment.url;
-  public dataFetched: boolean = false;
 
   constructor(private httpService: HttpService,
               private apiService: ApiService,
@@ -93,7 +92,7 @@ export class CharectersListComponent implements OnInit {
           }).subscribe(data => {
             list.push(character);
           });
-        },)
+        })
 
         if (tempData.next) {
           getList(tempData.next);
@@ -111,18 +110,20 @@ export class CharectersListComponent implements OnInit {
 
   setCharListState(data) {
     this.store.dispatch(new CharListActions.SetList(data));
+    localStorage.charectersList = JSON.stringify(data);
   }
 
   ngOnInit() {
-    this.getCharectersList();
+    if (!localStorage.charectersList) {
+      this.getCharectersList();
+    }
     this.store.select('charList').subscribe(data => {
-      // if (this.dataFetched) {
-      //   console.log(data);
-      //   return;
-      // } else {
-        this.dataFetched = true;
+      if (localStorage.charectersList) {
+        this.charactersList = JSON.parse(localStorage.charectersList);
+        return;
+      } else {
         this.charactersList = data;
-      // }
+      }
     })
   }
 

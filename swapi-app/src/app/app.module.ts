@@ -14,6 +14,7 @@ import { HttpService } from '../app/services/http.service';
 import { ApiService } from '../app/services/api.service';
 
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CharecterListReducer } from './reducers/charecters-list.reducer';
 
 const routes: Routes = [
@@ -37,7 +38,10 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
-    StoreModule.forRoot({charList: CharecterListReducer})
+    StoreModule.forRoot({charList: CharecterListReducer}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 30
+    }),
   ],
   providers: [
     HttpService,

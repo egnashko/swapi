@@ -2,9 +2,13 @@
   <li class="list-group-item">{{charecter.name || 'Name not available'}}</li>
   <li class="list-group-item">{{charecter.species || 'Species not available'}}</li>
   <li class="list-group-item">
-    Movies: <i *ngIf="!charecter.movies">No muvies present</i><q *ngFor="let film of charecter.movies">{{film}}, </q>
+    Movies: <i *ngIf="!charecter.movies.length">No muvies present</i>
+    <em *ngFor="let film of charecter.movies;let i = index">{{film}}<i *ngIf="i != charecter.movies.length - 1">, </i> </em>
   </li>
   <li class="list-group-item">
-    Spaceships: <i *ngIf="!charecter.spaceships">No spaceships available</i><q *ngFor="let spaceship of charecter.spaceships">{{spaceship}}, </q>
+    Spaceships: <i *ngIf="!charecter.spaceships.length">No spaceships available</i>
+    <em *ngFor="let spaceship of charecter.spaceships">{{spaceship}}<i *ngIf="i != charecter.movies.spaceships - 1">, </i></em>
   </li>
 </ul>
+<br>
+<button type="button" class="btn btn-secondary" (click)="goBack()">Go back</button>

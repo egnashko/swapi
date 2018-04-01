@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { environment } from '../../../environments/environment';
 import { characterModel } from '../../models/characterModel';
-
+import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
@@ -24,15 +24,24 @@ export class CharecterInfoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private httpService: HttpService,
-              private store: Store<AppState>) { }
+              private store: Store<AppState>,
+              private router: Router) { }
+
+  goBack() {
+    this.router.navigate(['charecters-list']);
+  }
 
   ngOnInit() {
     this.store.select('charList').subscribe(data => {
-      this.charactersList = data;
+      if (localStorage.charectersList) {
+        this.charactersList = JSON.parse(localStorage.charectersList);
+        return;
+      } else {
+        this.charactersList = data;
+      }
     })
     this.route.params.subscribe(res => {
       this.charecter = this.charactersList[res.id];
-      console.log(this.charecter);
     });
   }
 
