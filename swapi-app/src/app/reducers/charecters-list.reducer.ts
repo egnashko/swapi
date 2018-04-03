@@ -6,7 +6,6 @@ export type Action = CharListActions.Action;
 // const defaultList: characterModel[] = [];
 
 export function CharecterListReducer(state: characterModel[] = [], action: Action) {
-    console.log(action.payload);
     switch (action.type) {
         case CharListActions.SET_LIST:
             return action.payload;

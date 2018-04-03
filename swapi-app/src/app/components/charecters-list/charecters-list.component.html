@@ -1,4 +1,7 @@
+<div>
+    <app-filter></app-filter>
+</div>
 <ul class="list-group"><span>Characters list</span>
-    <li class="list-group-item" *ngIf="charactersList.length == 0">...wait a while, data loading...</li>
-    <li class="list-group-item" *ngFor="let charecter of charactersList; let i = index;" (click)="charecterInfo(i)">{{charecter.name}}</li>
+    <li class="list-group-item" *ngIf="charactersList.length == 0">...wait a while, data loading, long loading will be just once... </li>
+    <li class="list-group-item" *ngFor="let charecter of charactersList | filterPipe:filterArgs; let i = index;" (click)="charecterInfo(i)">{{charecter.name}}</li>
 </ul>

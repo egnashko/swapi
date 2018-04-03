@@ -1,0 +1,11 @@
+<span>Filter</span>
+<form class="input-group" [formGroup]="filterForm">
+  <select class="custom-select" formControlName="movies">
+    <option></option>
+    <option *ngFor="let film of films">{{film.title}}</option>
+  </select>
+  <select class="custom-select" formControlName="species">
+    <option></option>
+    <option *ngFor="let specie of species">{{specie.name}}</option>
+  </select>
+</form>

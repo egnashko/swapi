@@ -13,7 +13,8 @@ import { Store } from '@ngrx/store';
 import * as CharListActions from '../../actions/charecters-list.actions'; 
 
 interface AppState {
-  charList: characterModel[]
+  charList: characterModel[],
+  filter: any
 }
 
 @Component({
@@ -23,6 +24,7 @@ interface AppState {
 })
 export class CharectersListComponent implements OnInit {
   public charactersList: characterModel[] = [];
+  public filterArgs = {'movies': 'A New Hope'};
   private url: string = environment.url;
 
   constructor(private httpService: HttpService,
@@ -110,21 +112,28 @@ export class CharectersListComponent implements OnInit {
 
   setCharListState(data) {
     this.store.dispatch(new CharListActions.SetList(data));
-    localStorage.charectersList = JSON.stringify(data);
+    setTimeout(() => {
+      localStorage.charectersList = JSON.stringify(data);
+    }, 0);
   }
 
   ngOnInit() {
     if (!localStorage.charectersList) {
       this.getCharectersList();
+    } else {
+      this.store.dispatch(new CharListActions.SetList(JSON.parse(localStorage.charectersList)));
     }
     this.store.select('charList').subscribe(data => {
       if (localStorage.charectersList) {
         this.charactersList = JSON.parse(localStorage.charectersList);
-        return;
       } else {
         this.charactersList = data;
       }
     })
+    this.store.select('filter').subscribe(filter => {
+      this.filterArgs = filter;
+    });
   }
+  
 
 }
